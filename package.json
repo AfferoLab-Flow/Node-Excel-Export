@@ -14,11 +14,8 @@
     "Excel",
     "xlsx"
   ],
-  "author": {
-    "name": "Afferolab-Flow",
-    "email": "desenvolvimento.logistica@afferolab.com.br"
-  },
-  "license": "BSD",
+  "author": "Afferolab-Flow <desenvolvimento.logistica@afferolab.com.br>",
+  "license": "BSD-2-Clause",
   "dependencies": {
     "collections": "^3.0.0",
     "node-zip": "1.x"
@@ -31,5 +28,8 @@
     "url": "https://github.com/AfferoLab-Flow/Node-Excel-Export/issues"
   },
   "homepage": "https://github.com/AfferoLab-Flow/Node-Excel-Export",
-  "readme": ""
+  "directories": {
+    "example": "example",
+    "test": "test"
+  }
 }
