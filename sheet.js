@@ -1,5 +1,5 @@
 var sheetFront = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><x:worksheet xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:x="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' 
-		+ ' <x:sheetPr/><x:sheetViews><x:sheetView tabSelected="1" workbookViewId="0" /></x:sheetViews>' 
+		+ ' <x:sheetPr/><x:sheetViews><x:sheetView tabSelected="0" workbookViewId="0" /></x:sheetViews>'
 		+ ' <x:sheetFormatPr defaultColWidth="30"  baseColWidth="30" defaultRowHeight="15" />';
 var sheetBack =' <x:pageMargins left="0.75" right="0.75" top="0.75" bottom="0.5" header="0.5" footer="0.75" />'
 		+ ' <x:headerFooter /></x:worksheet>';
@@ -27,7 +27,7 @@ Sheet.prototype.generate = function(){
 	if (config.stylesXmlFile) {
 		var path = config.stylesXmlFile;
 		var styles = null;
-		styles = fs.readFileSync(path, 'utf8');
+		styles = fs.readFileSync('./' + path, 'utf8');
 		if (styles) {
 			xlsx.file("xl/styles.xml", styles);
 		}
@@ -54,7 +54,7 @@ Sheet.prototype.generate = function(){
 		currRow = i + 2;
 		row = '<x:row r="' + currRow + '" spans="1:' + colsLength + '">';
 		for (j = 0; j < colsLength; j++) {
-			styleIndex = null;
+			styleIndex = cols[j].styleIndex || null;
 			cellData = r[j];
 			cellType = cols[j].type;
 			if (typeof cols[j].beforeCellWrite === 'function') {
@@ -69,17 +69,20 @@ Sheet.prototype.generate = function(){
 				delete e;
 			}
 			switch (cellType) {
-			case 'number':
-				row += addNumberCell(getColumnLetter(j + 1) + currRow, cellData, styleIndex);
-				break;
-			case 'date':
-				row += addDateCell(getColumnLetter(j + 1) + currRow, cellData, styleIndex);
-				break;
-			case 'bool':
-				row += addBoolCell(getColumnLetter(j + 1) + currRow, cellData, styleIndex);
-				break;
-			default:
-				row += addStringCell(self, getColumnLetter(j + 1) + currRow, cellData, styleIndex);
+				case 'number':
+					row += addNumberCell(getColumnLetter(j + 1) + currRow, cellData, styleIndex);
+					break;
+				case 'date':
+					row += addDateCell(getColumnLetter(j + 1) + currRow, cellData, styleIndex);
+					break;
+				case 'bool':
+					row += addBoolCell(getColumnLetter(j + 1) + currRow, cellData, styleIndex);
+					break;
+				case 'money':
+					row += addMoneyCell(getColumnLetter(j + 1) + currRow, cellData, styleIndex);
+					break;
+				default:
+					row += addStringCell(self, getColumnLetter(j + 1) + currRow, cellData, styleIndex);
 			}
 		}
 		row += '</x:row>';
@@ -117,8 +120,16 @@ var addNumberCell = function(cellRef, value, styleIndex){
 		return '<x:c r="'+cellRef+'" s="'+ styleIndex +'" t="n"><x:v>'+value+'</x:v></x:c>';
 };
 
+var addMoneyCell = function(cellRef, value, styleIndex){
+	styleIndex = styleIndex || 2;
+	if (value===null)
+		return "";
+	else
+		return '<x:c r="'+cellRef+'" s="'+ styleIndex +'" t="n"><x:v>'+value+'</x:v></x:c>';
+};
+
 var addDateCell = function(cellRef, value, styleIndex){
-  styleIndex = styleIndex || 1;
+	styleIndex = styleIndex || 1;
 	if (value===null)
 		return "";
 	else
