@@ -1,22 +1,22 @@
 {
-  "name": "excel-export-2",
+  "name": "afferolabflow-excel-export",
   "version": "1.0.0",
-  "description": "Cloned form excel-export, fixes some of the issues with rendering Excels that I found in excel-export",
+  "description": "Cloned form excel-export-2, fixes some issues and add another features",
   "main": "index.js",
   "scripts": {
     "test": "mocha test/main"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/itechdom/Node-Excel-Export.git"
+    "url": "git+https://github.com/AfferoLab-Flow/Node-Excel-Export.git"
   },
   "keywords": [
     "Excel",
     "xlsx"
   ],
   "author": {
-    "name": "Osama Alghanmi",
-    "email": "osamah.net.m@gmail.com"
+    "name": "Afferolab-Flow",
+    "email": "desenvolvimento.logistica@afferolab.com.br"
   },
   "license": "BSD",
   "dependencies": {
@@ -28,8 +28,8 @@
     "should": ""
   },
   "bugs": {
-    "url": "https://github.com/itechdom/Node-Excel-Export/issues"
+    "url": "https://github.com/AfferoLab-Flow/Node-Excel-Export/issues"
   },
-  "homepage": "https://github.com/itechdom/Node-Excel-Export",
-  "readme": "ERROR: No README data found!"
+  "homepage": "https://github.com/AfferoLab-Flow/Node-Excel-Export",
+  "readme": ""
 }
