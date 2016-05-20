@@ -25,7 +25,7 @@ Sheet.prototype.generate = function(){
 	k;
 	config.fileName = 'xl/worksheets/' + (config.name || "sheet").replace(/[*?\]\[\/\/]/g, '') + '.xml';
 
-	var path = '/excelTemplates/styles.xml';
+	var path = __dirname + '/defaultStyles.xml';
 
 	if (config.stylesXmlFile) {
 		path = './' + config.stylesXmlFile;
