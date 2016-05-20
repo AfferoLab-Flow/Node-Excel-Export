@@ -1,6 +1,6 @@
 {
   "name": "afferolabflow-excel-export",
-  "version": "1.0.1",
+  "version": "0.0.2",
   "description": "Cloned form excel-export-2, fixes some issues and add another features",
   "main": "index.js",
   "scripts": {
