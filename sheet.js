@@ -24,13 +24,18 @@ Sheet.prototype.generate = function(){
   self = this,
 	k;
 	config.fileName = 'xl/worksheets/' + (config.name || "sheet").replace(/[*?\]\[\/\/]/g, '') + '.xml';
+
+	var path = '/excelTemplates/styles.xml';
+
 	if (config.stylesXmlFile) {
-		var path = config.stylesXmlFile;
-		var styles = null;
-		styles = fs.readFileSync('./' + path, 'utf8');
-		if (styles) {
-			xlsx.file("xl/styles.xml", styles);
-		}
+		path = './' + config.stylesXmlFile;
+	}
+
+	var styles = null;
+	styles = fs.readFileSync(path, 'utf8');
+
+	if (styles) {
+		xlsx.file("xl/styles.xml", styles);
 	}
 
 	//first row for column caption
@@ -92,7 +97,7 @@ Sheet.prototype.generate = function(){
 		sheetFront += '<cols>' + colsWidth + '</cols>';
 	}
 	xlsx.file(config.fileName, sheetFront + '<x:sheetData>' + rows + '</x:sheetData>' + sheetBack);
-}
+};
 
 module.exports = Sheet;
 
